@@ -1,0 +1,28 @@
+- - Create a lipstick store database
+
+CREATE TABLE lipstick (id INTEGER PRIMARY KEY, shade TEXT, brand TEXT, finish TEXT, price INTEGER, quantity INTEGER);
+
+INSERT INTO lipstick values (1, "red", "mac", "matte", 20, 4);
+INSERT INTO lipstick values (2, "nude", "ysl", "matte", 35, 10);
+INSERT INTO lipstick values (3, "nude", "smashbox", "satin", 25, 3);
+INSERT INTO lipstick values (4, "pink", "dose of colors", "satin", 20, 30);
+INSERT INTO lipstick values (5, "brown", "beauty creations", "matte", 2, 15);
+INSERT INTO lipstick values (6, "nude", "mac", "matte", 20, 10);
+INSERT INTO lipstick values (7, "purple", "mac", "matte", 20, 2);
+INSERT INTO lipstick values (8, "pink nude", "dior", "matte", 35, 10);
+INSERT INTO lipstick values (9, "orange", "nyx", "matte", 35, 10);
+INSERT INTO lipstick values (10, "brown", "kosas", "glossy", 20, 10);
+INSERT INTO lipstick values (11, "beige", "kosas", "glossy", 20, 40);
+INSERT INTO lipstick values (12, "black", "revlon", "matte", 10, 2);
+INSERT INTO lipstick values (13, "clear", "wet n wild", "glossy", 5, 10);
+INSERT INTO lipstick values (14, "red", "wet n wild", "matte", 5, 10);
+INSERT INTO lipstick values (15, "pink", "fenty", "matte", 25, 10);
+
+-- display the database ordered by price.
+SELECT * FROM lipstick ORDER BY price;
+
+--what is the most expensive price for a lipstick ?
+SELECT MAX(price) as most_dollars_paid FROM lipstick;
+
+--what is the least expensive price for a lipstick ?
+SELECT MIN(price) as least_dollars_paid FROM lipstick;
