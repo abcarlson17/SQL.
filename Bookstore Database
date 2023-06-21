@@ -1,0 +1,72 @@
+** This project, I created a table for a bookstore that contained data on book name, price, genre, format, and how many pages each book contains. I then pulled data to answer any questions that came up.
+
+CREATE TABLE bookstore (id INTEGER PRIMARY KEY, name TEXT, price INTEGER, format TEXT, genre TEXT, pages INTEGER);
+
+INSERT INTO bookstore VALUES (1, "The Sun Also Rises", 20, "paper", "fiction", 250);
+INSERT INTO bookstore VALUES (2, "To Kill A Mockingbird", 25, "paper", "fiction", 350);
+INSERT INTO bookstore VALUES (3, "Their Eyes Were Watching", 10, "paper", "fiction", 150);
+INSERT INTO bookstore VALUES (4, "The Sun Also Rises", 20, "paper", "fiction", 250);
+INSERT INTO bookstore VALUES (5, "A Little Princess", 20, "paper", "fiction", 200);
+INSERT INTO bookstore VALUES (6, "Eleanor Oliphant", 30, "paper", "fiction", 350);
+INSERT INTO bookstore VALUES (7, "The Goldfinch", 20, "paper", "fiction", 250);
+INSERT INTO bookstore VALUES (8, "Game of Thrones", 35, "paper", "fantasy", 550);
+INSERT INTO bookstore VALUES (9, "Harry Potter and The Chamber of Secrets", 20, "ebook", "fiction", 350);
+INSERT INTO bookstore VALUES (10, "Harry Potter and The Sorcerer's Ston", 20, "ebook", "fiction", 450);
+INSERT INTO bookstore VALUES (11, "Harry Potter and The Prisoner of Azkaban", 20, "ebook", "fiction", 650);
+INSERT INTO bookstore VALUES (12, "Harry Potter and The Goblet of Fire", 20, "ebook", "fiction", 780);
+INSERT INTO bookstore VALUES (13, "Harry Potter and The Order of The Phoenix", 20, "ebook", "fiction", 955);
+INSERT INTO bookstore VALUES (14, "Harry Potter and The Half-Blooded Prince", 20, "ebook", "fiction", 1000);
+INSERT INTO bookstore VALUES (15, "IT", 15, "paper", "Horror", 350);
+INSERT INTO bookstore VALUES (16, "The Silence of The Lambs", 20, "ebook", "horror", 500);
+INSERT INTO bookstore VALUES (17, "The Haunting of Hill House", 20, "ebook", "horror", 800);
+INSERT INTO bookstore VALUES (18, "Murder on the Orient Express", 35, "paper", "mystery", 500);
+INSERT INTO bookstore VALUES (19, "Sherlock Holmes", 40, "paper", "mystery", 1000);
+INSERT INTO bookstore VALUES (20, "In The Woods", 20, "ebook", "mystery", 225);
+INSERT INTO bookstore VALUES (21, "The Wedding Date", 25, "paper", "romance", 350);
+INSERT INTO bookstore VALUES (22, "The Martian", 25, "ebook", "thriller", 680);
+INSERT INTO bookstore VALUES (23, "Gone Girl", 34, "ebook", "thriller", 350);
+INSERT INTO bookstore VALUES (24, "The Fault In Our Stars", 15, "paper", "young adult", 300);
+INSERT INTO bookstore VALUES (25, "Eleanor & Park", 10, "ebook", "young adult", 350);
+
+** Display most expensvie book ** 
+SELECT MAX(price) FROM bookstore;
+
+** Display least expensive book **
+SELECT MIN(price) FROM bookstore;
+
+** Calculate average price of books **
+SELECT AVG(price) FROM bookstore;
+
+** Display book with highest amount of pages  **
+SELECT MAX(pages) FROM bookstore;
+
+** Display book with least amount of pages **
+SELECT MIN(pages) FROM bookstore;
+
+** Calculate average amount of pages for books in the database? **
+SELECT AVG(pages) FROM bookstore;
+
+** Selected all data from bookstore database table and order the data by book price. **
+SELECT * FROM bookstore ORDER BY "price";
+
+** Display grouping by genre where the page amount is greater than 500 pages. Show in ascending order. **
+SELECT genre, SUM(pages) AS page_amount FROM bookstore GROUP BY genre HAVING page_amount < 500 ORDER BY page_amount ASC;
+
+** Categorize page numbers and genre into a reader level to know how hard of a read a genre is **
+SELECT pages, genre,
+CASE
+WHEN pages< 450 AND "genre" = "young adult" THEN "Books is Easy Read"
+WHEN pages< 500 AND "genre" = "fiction" THEN "Book is Moderate Read"
+WHEN pages > 350 AND "genre" = "horror" THEN "Book is Hard Read"
+WHEN pages >800 AND "genre" = "thriller" THEN "Book is Hard Read"
+WHEN pages >1000 AND "genre" = "fantasy" THEN "Book is Expert Read"
+ELSE "No Category"
+END AS "Reader_Level"
+FROM bookstore
+GROUP BY "Reader_Level";
+
+** ** Display books two different genre's and order books according to page amount **
+SELECT * FROM bookstore WHERE "genre" = "horror" OR "genre" = "young adult" ORDER BY pages;
+
+** Display books from "young adult" genre that only comes in paper format **
+SELECT * FROM bookstore WHERE "genre" = "young adult" AND "format" = "paper";
